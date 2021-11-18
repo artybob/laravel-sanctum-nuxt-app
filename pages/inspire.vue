@@ -17,3 +17,15 @@
     </v-col>
   </v-row>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+    }
+  },
+  middleware: 'auth',
+  methods: {
+  },
+}
+</script>

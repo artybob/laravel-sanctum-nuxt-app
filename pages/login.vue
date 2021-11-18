@@ -67,6 +67,7 @@
 </template>
 
 <script>
+
 export default {
   name: "login",
   data: () => ({
@@ -106,12 +107,15 @@ export default {
           email: this.user.email,
           password: this.user.password,
         },
+      }).catch((err) => {
+        $nuxt.$emit('login-error', err.response.data.message)
       })
 
       this.$router.push('/')
     },
   },
 }
+
 </script>
 
 <style scoped>
