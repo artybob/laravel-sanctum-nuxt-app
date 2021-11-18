@@ -1,13 +1,16 @@
 <template>
-$END$
+  <div></div>
 </template>
 
 <script>
 export default {
-name: "logout"
+  name: 'Exit',
+  mounted() {
+    this.$auth.logout().then(() => {
+      window.location = '/'
+    })
+  },
 }
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

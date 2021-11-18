@@ -13,6 +13,7 @@
           <h1 v-if="this.$auth.user">
             Hi {{ this.$auth.user.name }}
           </h1>
+          <a href="#" @click.prevent="logout">Logout</a>
         </v-card-text>
         <v-card-actions>
           <v-spacer/>
@@ -37,6 +38,11 @@ export default {
   },
   middleware: 'auth',
   methods: {
+    async logout() {
+      await this.$auth.logout()
+
+      this.$router.push('/login')
+    },
   },
 }
 </script>
