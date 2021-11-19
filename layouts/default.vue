@@ -9,7 +9,7 @@
     >
       <v-list>
         <v-list-item
-          v-for="(item, i) in items"
+          v-for="(item, i) in menu"
           :key="i"
           :to="item.to"
           router
@@ -42,7 +42,6 @@
       :absolute="!fixed"
       app
     >
-      {{this.$auth.user}}
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
@@ -50,15 +49,16 @@
 
 <script>
 import Snack from "@/components/helpers/Snack";
+
 export default {
   components: {Snack},
   data() {
     return {
-      user: this.$auth.user?.data,
+      user: this.$store.state.auth.user,
       clipped: false,
       drawer: false,
       fixed: false,
-      items: [
+      menuItems: [
         {
           icon: 'mdi-apps',
           title: 'Welcome',
@@ -69,8 +69,15 @@ export default {
           title: 'Inspire',
           to: '/inspire'
         },
-      ].concat(
-        this.$auth.user
+      ],
+      title: 'Laravel-Sanctum-Nuxt-app'
+    }
+  },
+  computed: {
+    menu: function () {
+      //render menu
+      return this.menuItems.concat(
+        this.$store.state.auth.loggedIn
           ? [
             {
               icon: 'mdi-arrow-left-bold-box',
@@ -79,24 +86,20 @@ export default {
             },
             {
               icon: 'mdi-account-box',
-              title: this.$auth.user.name,
+              title: this.$store.state.auth.user.name,
               to: '',
             },
           ]
-          : { icon: 'mdi-arrow-right-bold-box', title: 'Login', to: '/login' }
-      ),
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Laravel-Sanctum-Nuxt-app'
-    }
-  },
-  methods: {
-    async logout() {
-      await this.$auth.logout()
-
-      this.$router.push('/login')
+          : {icon: 'mdi-arrow-right-bold-box', title: 'Login', to: '/login'}
+      )
     },
-  },
+    methods: {
+      async logout() {
+        await this.$auth.logout()
+
+        this.$router.push('/login')
+      },
+    },
+  }
 }
 </script>

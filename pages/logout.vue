@@ -7,7 +7,6 @@ export default {
   name: 'Exit',
   mounted() {
     this.$auth.logout().then(() => {
-      window.location = '/'
     })
   },
 }

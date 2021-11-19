@@ -89,6 +89,9 @@ export default {
       this.user = JSON.parse(localStorage.user);
     }
   },
+  computed: {
+
+  },
   methods: {
     validate() {
       this.$refs.form.validate()
@@ -110,8 +113,6 @@ export default {
       }).catch((err) => {
         $nuxt.$emit('login-error', err.response.data.message)
       })
-
-      this.$router.push('/')
     },
   },
 }
