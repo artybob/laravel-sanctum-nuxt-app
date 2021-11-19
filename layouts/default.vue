@@ -2,8 +2,6 @@
   <v-app dark>
     <v-navigation-drawer
       v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
       fixed
       app
     >
@@ -80,26 +78,40 @@ export default {
         this.$store.state.auth.loggedIn
           ? [
             {
+              icon: 'mdi-account-multiple-plus',
+              title: 'create User',
+              to: '/createUser',
+            },
+            {
+              icon: 'mdi-account-box',
+              title: this.$store.state.auth.user['data'].name,
+              to: '/me',
+            },
+            {
               icon: 'mdi-arrow-left-bold-box',
               title: 'Logout',
               to: '/logout',
             },
+          ]
+          : [
             {
-              icon: 'mdi-account-box',
-              title: this.$store.state.auth.user.name,
-              to: '',
+              icon: 'mdi-arrow-right-bold-box',
+              title: 'Login', to: '/login'
+            },
+            {
+              icon: 'mdi-account-plus',
+              title: 'Register', to: '/register'
             },
           ]
-          : {icon: 'mdi-arrow-right-bold-box', title: 'Login', to: '/login'}
       )
     },
-    methods: {
-      async logout() {
-        await this.$auth.logout()
+  },
+  methods: {
+    async logout() {
+      await this.$auth.logout()
 
-        this.$router.push('/login')
-      },
+      this.$router.push('/login')
     },
-  }
+  },
 }
 </script>

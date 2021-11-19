@@ -24,7 +24,7 @@ export default {
     return {
     }
   },
-  middleware: 'auth',
+  middleware: 'authenticated',
   methods: {
   },
 }

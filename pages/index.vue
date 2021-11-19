@@ -10,8 +10,8 @@
           Welcome to the Vuetify + Nuxt.js template
         </v-card-title>
         <v-card-text>
-          <h1 v-if="this.$auth.user">
-            Hi {{ this.$auth.user.name }}
+          <h1 v-if="this.$store.state.auth.user">
+            Hi {{ this.$store.state.auth.user['data'].name }}
           </h1>
         </v-card-text>
         <v-card-actions>
