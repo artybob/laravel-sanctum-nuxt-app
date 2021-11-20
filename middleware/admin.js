@@ -1,5 +1,5 @@
-export default function ({$auth, redirect}) {
-  console.log($auth.user['data'].roles);
+export default function ({$store, redirect}) {
+  // console.log($auth.user['data'].roles);
   // if ($auth.user['data'].roles.includes('admin')) {  // Super Admin or whatever the user you want to check
   //   return redirect('/oops')
   // }

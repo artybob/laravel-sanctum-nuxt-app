@@ -23,7 +23,7 @@ export default {
     };
   },
   created() {
-    this.$nuxt.$on('login-error', response => {
+    this.$nuxt.$on('error', response => {
       this.alertMessage = response;
       this.alertSnack("error");
     })

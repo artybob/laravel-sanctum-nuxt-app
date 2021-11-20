@@ -18,21 +18,21 @@ export default {
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}
     ]
   },
+
   axios: {
-    baseUrl: 'http://localhost:8000',
+    baseUrl: process.env.API_URL,
     credentials: true,
   },
+
 
   auth: {
     strategies: {
       'laravelSanctum': {
         provider: 'laravel/sanctum',
-        url: 'http://localhost:8000',
+        url: process.env.API_URL,
       },
     },
   },
-  ssr: true,
-
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
@@ -52,6 +52,7 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
+    '@nuxtjs/dotenv',
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

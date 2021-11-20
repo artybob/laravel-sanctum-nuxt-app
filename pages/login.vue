@@ -21,12 +21,14 @@
             v-model="user.email"
             label="E-mail"
             required
+            @change="saveUserStorage()"
           ></v-text-field>
 
           <v-text-field
             v-model="user.password"
             label="Password"
             required
+            @change="saveUserStorage()"
           ></v-text-field>
 
           <!--          <v-checkbox-->
@@ -88,11 +90,14 @@ export default {
     if ((localStorage.getItem('user') !== null)) {
       this.user = JSON.parse(localStorage.user);
     }
+    console.log(process.env.API_URL)
   },
   computed: {
-
   },
   methods: {
+    saveUserStorage() {
+      localStorage.setItem('user', JSON.stringify({email: this.user.email, password: this.user.password,}));
+    },
     validate() {
       this.$refs.form.validate()
     },
@@ -103,15 +108,13 @@ export default {
       this.$refs.form.resetValidation()
     },
     async login() {
-      localStorage.setItem('user', JSON.stringify({email: this.user.email, password: this.user.password,}));
-
       await this.$auth.loginWith('laravelSanctum', {
         data: {
           email: this.user.email,
           password: this.user.password,
         },
       }).catch((err) => {
-        $nuxt.$emit('login-error', err.response.data.message)
+        $nuxt.$emit('error', err.response.data.message)
       })
     },
   },
