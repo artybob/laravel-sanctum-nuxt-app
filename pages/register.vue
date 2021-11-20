@@ -67,29 +67,25 @@ export default {
       this.$refs.form.validate()
     },
     async register() {
-      this.$axios.get(process.env.API_URL('sanctum/csrf-cookie')).then(response => {
-        return axios.post(baseUrl('register'), {
-          email: this.user.email,
-          password: this.user.password,
-        }, {
-          xsrfHeaderName: "X-XSRF-TOKEN", // change the name of the header to "X-XSRF-TOKEN" and it should works
-          withCredentials: true
+      this.$axios.get(process.env.API_URL + '/sanctum/csrf-cookie').then(response => {
+        return this.$axios.post(process.env.API_URL + '/register', this.user).catch((err) => {
+          let errors = [];
+          if (err.response.data.errors) {
+            for (const [key, value] of Object.entries(err.response.data.errors)) {
+              errors.push(value);
+            }
+          }
+          $nuxt.$emit('error', err.response.data.message.concat(errors.join(' ')))
+        }).then((res) => {
+          if (res.status = 200) {
+            this.$auth.loginWith('laravelSanctum', {
+              data: this.user,
+            })
+          }
         });
       })
-
-
-      // await this.$axios.post(
-      //   '/register', {
-      //     data: {
-      //       email: this.user.email,
-      //       password: this.user.password,
-      //     },
-      //   }
-      // ).catch((err) => {
-      //   $nuxt.$emit('error', err.response.data.message)
-      // })
-    },
-  },
+    }
+  }
 }
 
 </script>

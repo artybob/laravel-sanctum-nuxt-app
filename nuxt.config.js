@@ -22,6 +22,8 @@ export default {
   axios: {
     baseUrl: process.env.API_URL,
     credentials: true,
+    xsrfHeaderName: "X-XSRF-TOKEN", // change the name of the header to "X-XSRF-TOKEN" and it should works
+    withCredentials: true
   },
 
 
