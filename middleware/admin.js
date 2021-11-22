@@ -1,13 +1,8 @@
-export default function ({$store, redirect}) {
-  // console.log($auth.user['data'].roles);
-  // if ($auth.user['data'].roles.includes('admin')) {  // Super Admin or whatever the user you want to check
-  //   return redirect('/oops')
-  // }
+export default function ({$auth, redirect}) {
 
-  // if (!$auth.hasScope('admin')) {
-  //   return redirect('/oops')
-  // }
+  if ($auth.user.data.roles.includes('admin')) {
+    console.log('ok')
+  } else {
+    return redirect('/oops')
+  }
 }
-
-//создать вомзожность админу создавть юзера
-//добавить возможность регистрации

@@ -1,13 +1,19 @@
 <template>
-<!--  <error></error>-->
-  <div>Error!</div>
+  <error :error="this.error"></error>
 </template>
 
 <script>
 import Error from "~/layouts/error";
+
 export default {
   name: "oops",
-  components: {Error}
+  components: {Error},
+  props: {
+    error: {
+      type: Object,
+      default: null,
+    }
+  },
 }
 </script>
 
