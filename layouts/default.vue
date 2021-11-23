@@ -83,12 +83,17 @@ export default {
               to: '/createUser',
             },
             {
+              icon: 'mdi-access-point',
+              title: 'pusherChat',
+              to: '/pusherChat',
+            },
+            {
               icon: 'mdi-account-box',
               title: this.$store.state.auth.user['data'].name,
               to: '/me',
             },
             {
-              icon: 'mdi-arrow-left-bold-box',
+              icon: 'mdi-arrow-left-bold-box  ',
               title: 'Logout',
               to: '/logout',
             },

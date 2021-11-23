@@ -55,6 +55,12 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
     '@nuxtjs/dotenv',
+    ['@nuxtjs/laravel-echo', {
+      broadcaster: 'pusher',
+      key: 'fa078a2591e7259497d9',
+      cluster: 'ap2',
+      encrypted: true
+    }],
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -75,6 +81,15 @@ export default {
       }
     }
   },
+
+
+  // Echo.private('chat')
+  //   .listen('MessageSent', (e) => {
+  //     this.messages.push({
+  //       message: e.message.message,
+  //       user: e.user
+  //     });
+  //   });
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {}
