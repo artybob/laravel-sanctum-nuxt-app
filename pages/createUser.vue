@@ -133,7 +133,7 @@ export default {
       })
     },
     async createUser() {
-      this.$axios.get(process.env.API_URL + '/sanctum/csrf-cookie').then(response => {
+      // this.$axios.get(process.env.API_URL + '/sanctum/csrf-cookie').then(response => {
         return this.$axios.post(process.env.API_URL + '/api/createUser', this.user).catch((err) => {
           let errors = [];
           if (err.response.data.errors) {
@@ -147,16 +147,14 @@ export default {
             this.getUsers();
           }
         });
-      })
+      // })
     },
     removeUser(user) {
       this.user = user;
       this.dialogDelete = true;
     },
-    async removeUserConfirm() {
-
-      this.$axios.get(process.env.API_URL + '/sanctum/csrf-cookie').then(response => {
-        return this.$axios.post(process.env.API_URL + '/api/removeUser', {user_id: this.user.id}).catch((err) => {
+    removeUserConfirm() {
+        this.$axios.post(process.env.API_URL + '/api/removeUser', {user_id: this.user.id}).catch((err) => {
           let errors = [];
           if (err.response.data.errors) {
             for (const [key, value] of Object.entries(err.response.data.errors)) {
@@ -170,7 +168,6 @@ export default {
             this.dialogDelete = false;
           }
         });
-      })
     }
   }
 }

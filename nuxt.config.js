@@ -26,12 +26,25 @@ export default {
     withCredentials: true
   },
 
-
+  echo: {
+    broadcaster: 'pusher',
+    key: 'fa078a2591e7259497d9',
+    cluster: 'ap2',
+    encrypted: true,
+    authEndpoint: process.env.API_URL+"/broadcasting/auth",
+    // csrfToken: ' ',
+    disableStats: false,
+  },
+  //eyJpdiI6InpBMTRTaTIxMEdMQUMwZU5PMVErVmc9PSIsInZhbHVlIjoiQkUxRzNOeGl2TkVNVk9YMHhzOXpEcVI0NlpDckM3ZkNNcWNhMUEvNnZBTDhQWjF0WGViK0NMcVR6VmFCbE5MaXNraENvM2FHNVdGeXVyTHpNWU8xQ2gzYWltbnU2Qnp2WHNVbTI3M3dqczJ6SmttWXVEeDFpbytvMmJIcks3VzMiLCJtYWMiOiI5MTg2ODM0MDYxZWY0ZjAwYTE5MWY4NTE3YzUzYTgxMTk3MTZmYTU3YjkzZGFlOWQxYTRjYWEzZmM4NjZjZjY3IiwidGFnIjoiIn0%3D
   auth: {
     strategies: {
       'laravelSanctum': {
         provider: 'laravel/sanctum',
         url: process.env.API_URL,
+        headers: {
+          Authorization: 'Bearer ',
+          'Access-Control-Allow-Origin' : '*',
+        },
       },
     },
   },
@@ -55,12 +68,8 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
     '@nuxtjs/dotenv',
-    ['@nuxtjs/laravel-echo', {
-      broadcaster: 'pusher',
-      key: 'fa078a2591e7259497d9',
-      cluster: 'ap2',
-      encrypted: true
-    }],
+    '@nuxtjs/laravel-echo',
+    'cookie-universal-nuxt',
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
@@ -81,15 +90,6 @@ export default {
       }
     }
   },
-
-
-  // Echo.private('chat')
-  //   .listen('MessageSent', (e) => {
-  //     this.messages.push({
-  //       message: e.message.message,
-  //       user: e.user
-  //     });
-  //   });
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {}

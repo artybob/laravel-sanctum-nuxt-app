@@ -58,8 +58,8 @@ export default {
       this.$refs.form.validate()
     },
     async register() {
-      this.$axios.get(process.env.API_URL + '/sanctum/csrf-cookie').then(response => {
-        return this.$axios.post(process.env.API_URL + '/register', this.user).catch((err) => {
+      // this.$axios.get(process.env.API_URL + '/sanctum/csrf-cookie').then(response => {
+        this.$axios.post(process.env.API_URL + '/register', this.user).catch((err) => {
           let errors = [];
           if (err.response.data.errors) {
             for (const [key, value] of Object.entries(err.response.data.errors)) {
@@ -74,7 +74,7 @@ export default {
             })
           }
         });
-      })
+      // })
     }
   }
 }

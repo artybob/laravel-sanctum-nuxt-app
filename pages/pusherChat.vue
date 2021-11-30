@@ -1,27 +1,62 @@
 <template>
   <div>
-    <ul class="chat">
-      <li class="left clearfix" v-for="message in messages">
-        <div class="chat-body clearfix">
-          <div class="header">
-            <strong class="primary-font">
-              {{ message.user.name }}
-            </strong>
-          </div>
-          <p>
-            {{ message.message }}
-          </p>
-        </div>
-      </li>
-    </ul>
+    <div class="chat" v-for="message in messages">
+      <v-card
+        elevation="0"
+        dense
+        class="mx-auto mt-4"
+      >
+        <v-list-item three-line>
+          <v-list-item-avatar
+            tile
+            size="40"
+            color="grey"
+          >
+<!--            hardcoded api url-->
+            <v-img
+              aspect-ratio="1.7"
+              :src="'http://localhost:8000/storage/' + message.user.avatar"
+              >
+            </v-img>
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <div class="text-overline mb-4" v-if="message.user">
+              <strong class="primary-font">
+                {{ message.user.name }}
+                <v-chip
+                  class="ma-2"
+                  small
+                >{{ message.created_at }}
+                </v-chip>
+              </strong>
+            </div>
+            <v-list-item-title class="mb-1">
+              {{ message.message }}
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-card>
+
+    </div>
+
+    <!--    <p v-on:messagesent="addMessage">-->
+    <!--      {{ message.message }}-->
+    <!--    </p>-->
 
     <div class="input-group">
-      <input id="btn-input" type="text" name="message" class="form-control input-sm" placeholder="Type your message here..." v-model="newMessage" @keyup.enter="sendMessage">
-
+      <v-textarea
+        id="btn-input"
+        type="text"
+        name="message"
+        class="form-control input-sm"
+        placeholder="Type your message here..."
+        v-model="newMessage"
+        @keyup.enter="sendMessage">
+      </v-textarea>
       <span class="input-group-btn">
-            <button class="btn btn-primary btn-sm" id="btn-chat" @click="sendMessage">
-                Send
-            </button>
+          <v-btn class="btn btn-primary btn-sm" id="btn-chat" @click="sendMessage">
+              Send
+          </v-btn>
         </span>
     </div>
   </div>
@@ -37,32 +72,44 @@ export default {
       messages: []
     }
   },
+
+// {
+//   data: {
+//     email: this.user.email,
+//       password: this.user.password,
+//   },
+// }
+
+  mounted() {
+    // this.$axios.setHeader('XSRF-TOKEN', this.$cookies.get('XSRF-TOKEN'))
+    this.$echo.channel('chat')
+      .listen('MessageSent', (e) => {
+        console.log(e)
+        this.messages.push({user: e.user, message: e.message.message, created_at: e.message.created_at});
+      })
+  },
   created() {
+
     this.fetchMessages();
   },
   middleware: 'authenticated',
   methods: {
     sendMessage() {
-      this.$emit('messagesent', {
-        user: this.user,
-        message: this.newMessage
+      // this.$emit('messagesent', {
+      //   user: this.$store.state.auth.user['data'],
+      //   message: this.newMessage
+      // });
+      this.$axios.post('/api/messages', {message: this.newMessage}).then(response => {
+        console.log(response.data);
       });
 
       this.newMessage = ''
     },
     fetchMessages() {
-      this.$axios.get('/messages').then(response => {
+      this.$axios.get('/api/messages').then(response => {
         this.messages = response.data;
       });
     },
-
-    addMessage(message) {
-      this.messages.push(message);
-
-      this.$axios.post('/messages', message).then(response => {
-        console.log(response.data);
-      });
-    }
   }
 }
 </script>
