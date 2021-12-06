@@ -92,8 +92,7 @@ export default {
     }
     console.log(process.env.API_URL)
   },
-  computed: {
-  },
+  computed: {},
   methods: {
     saveUserStorage() {
       localStorage.setItem('user', JSON.stringify({email: this.user.email, password: this.user.password,}));
@@ -108,9 +107,9 @@ export default {
       this.$refs.form.resetValidation()
     },
     async login() {
-      await this.$auth.loginWith('laravelSanctum', {
+      await this.$auth.loginWith('laravelPassport', {
         data: {
-          email: this.user.email,
+          username: this.user.email,
           password: this.user.password,
         },
       }).catch((err) => {

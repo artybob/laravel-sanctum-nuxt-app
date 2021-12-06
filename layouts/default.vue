@@ -89,7 +89,7 @@ export default {
             },
             {
               icon: 'mdi-account-box',
-              title: this.$store.state.auth.user['data'].name,
+              title: this.$store.state.auth.user['data']?.name,
               to: '/me',
             },
             {

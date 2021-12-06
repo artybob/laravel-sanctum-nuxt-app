@@ -11,7 +11,7 @@
         </v-card-title>
         <v-card-text>
           <h1 v-if="this.$store.state.auth.user">
-            Hi {{ this.$store.state.auth.user['data'].name }}
+            {{ this.$store.state.auth.user['data'].name}}
           </h1>
         </v-card-text>
         <v-card-actions>

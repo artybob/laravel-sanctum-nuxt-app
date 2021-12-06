@@ -31,23 +31,31 @@ export default {
     key: 'fa078a2591e7259497d9',
     cluster: 'ap2',
     encrypted: true,
-    authEndpoint: process.env.API_URL+"/broadcasting/auth",
+    authEndpoint: process.env.API_URL + "/broadcasting/auth",
     // csrfToken: ' ',
     disableStats: false,
   },
-  //eyJpdiI6InpBMTRTaTIxMEdMQUMwZU5PMVErVmc9PSIsInZhbHVlIjoiQkUxRzNOeGl2TkVNVk9YMHhzOXpEcVI0NlpDckM3ZkNNcWNhMUEvNnZBTDhQWjF0WGViK0NMcVR6VmFCbE5MaXNraENvM2FHNVdGeXVyTHpNWU8xQ2gzYWltbnU2Qnp2WHNVbTI3M3dqczJ6SmttWXVEeDFpbytvMmJIcks3VzMiLCJtYWMiOiI5MTg2ODM0MDYxZWY0ZjAwYTE5MWY4NTE3YzUzYTgxMTk3MTZmYTU3YjkzZGFlOWQxYTRjYWEzZmM4NjZjZjY3IiwidGFnIjoiIn0%3D
+
   auth: {
     strategies: {
-      'laravelSanctum': {
-        provider: 'laravel/sanctum',
-        url: process.env.API_URL,
-        headers: {
-          Authorization: 'Bearer ',
-          'Access-Control-Allow-Origin' : '*',
+      'laravelPassport': {
+        provider: 'laravel/passport',
+        endpoints: {
+          login: {url:'/api/login', method:'post'},
+          // token : '/api/v1/confirmCode',
+          user: {url: '/api/user', method:'get'},
+          logout: {url:'/api/logout', method:'post'},
+          userInfo: process.env.LARAVEL_ENDPOINT + "/api/oauth/me"
         },
+        grantType: 'password',
+        url: process.env.LARAVEL_ENDPOINT,
+        clientId: process.env.PASSPORT_CLIENT_ID,
+        clientSecret: process.env.PASSPORT_CLIENT_SECRET,
       },
     },
   },
+  //'application/json'
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 

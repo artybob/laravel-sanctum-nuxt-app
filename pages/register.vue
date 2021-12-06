@@ -69,7 +69,7 @@ export default {
           $nuxt.$emit('error', err.response.data.message.concat(errors.join(' ')))
         }).then((res) => {
           if (res.status = 200) {
-            this.$auth.loginWith('laravelSanctum', {
+            this.$auth.loginWith('laravelPassport', {
               data: this.user,
             })
           }
