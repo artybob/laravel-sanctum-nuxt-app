@@ -4,9 +4,11 @@
 
 <script>
 export default {
+  middleware: ['auth'],
   name: 'Exit',
   mounted() {
     this.$auth.logout().then(() => {
+      return this.$router.push('/login');
     })
   },
 }

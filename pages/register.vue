@@ -46,6 +46,7 @@
 
 export default {
   name: "login",
+  middleware: ['guest'],
   data: () => ({
     valid: true,
     user: {email: '', password: '', name: ''},
@@ -59,7 +60,7 @@ export default {
     },
     async register() {
       // this.$axios.get(process.env.API_URL + '/sanctum/csrf-cookie').then(response => {
-        this.$axios.post(process.env.API_URL + '/register', this.user).catch((err) => {
+        this.$axios.post(process.env.API_URL + '/api/register', this.user).catch((err) => {
           let errors = [];
           if (err.response.data.errors) {
             for (const [key, value] of Object.entries(err.response.data.errors)) {
@@ -69,8 +70,11 @@ export default {
           $nuxt.$emit('error', err.response.data.message.concat(errors.join(' ')))
         }).then((res) => {
           if (res.status = 200) {
-            this.$auth.loginWith('laravelPassport', {
-              data: this.user,
+            this.$auth.loginWith('laravelPassportPassword', {
+              data: {
+                username: this.user.email,
+                password: this.user.password,
+              },
             })
           }
         });

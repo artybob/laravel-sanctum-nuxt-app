@@ -37,24 +37,24 @@ export default {
   },
 
   auth: {
+    redirect: {
+      home: '/',
+    },
     strategies: {
-      'laravelPassport': {
+      laravelPassportPasswordGrant: {
+        name: 'laravelPassportPassword',
         provider: 'laravel/passport',
         endpoints: {
-          login: {url:'/api/login', method:'post'},
-          // token : '/api/v1/confirmCode',
-          user: {url: '/api/user', method:'get'},
-          logout: {url:'/api/logout', method:'post'},
-          userInfo: process.env.LARAVEL_ENDPOINT + "/api/oauth/me"
+          logout: {url: '/api/logout', method: 'post'},
+          user: {url: '/api/user', method: 'get'},
         },
-        grantType: 'password',
         url: process.env.LARAVEL_ENDPOINT,
         clientId: process.env.PASSPORT_CLIENT_ID,
         clientSecret: process.env.PASSPORT_CLIENT_SECRET,
+        grantType: 'password',
       },
     },
   },
-  //'application/json'
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
