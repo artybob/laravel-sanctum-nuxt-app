@@ -45,14 +45,48 @@ export default {
         name: 'laravelPassportPassword',
         provider: 'laravel/passport',
         endpoints: {
+          register: {
+            url: '/api/register',
+            method: 'post'
+          },
+          login: {
+            url: '/api/login',
+            method: 'post',
+            propertyName: "token"
+          },
           logout: {url: '/api/logout', method: 'post'},
-          user: {url: '/api/user', method: 'get'},
+          user: {
+            url: '/api/user',
+            method: 'get',
+          },
         },
+        grantType: 'password',
         url: process.env.LARAVEL_ENDPOINT,
         clientId: process.env.PASSPORT_CLIENT_ID,
         clientSecret: process.env.PASSPORT_CLIENT_SECRET,
-        grantType: 'password',
       },
+      // password_grant_custom: {
+      //   name: 'passwordGrantCustom',
+      //   scheme: "~/auth/schemes/PassportPasswordScheme.js",
+      //   client_id: process.env.PASSPORT_CLIENT_ID,
+      //   client_secret: process.env.PASSPORT_CLIENT_SECRET,
+      //   endpoints: {
+      //     register: {
+      //       url: '/api/register',
+      //       method: 'post'
+      //     },
+      //     login: {
+      //       url: '/api/login',
+      //       method: 'post',
+      //       propertyName: "token"
+      //     },
+      //     logout: false,
+      //     user: {
+      //       url: "api/user",
+      //       method: 'get',
+      //     }
+      //   }
+      // },
     },
   },
 

@@ -14,15 +14,25 @@ export default {
     }
   },
   mounted() {
-    this.$auth.setToken('local', 'Bearer ' + this.token);
-    this.$auth.setStrategy('local');
+    // console.log(this.token)
+    // this.$auth.setStrategy('laravelPassportPassword');
+    this.$auth.setUserToken(this.token);
 
-    this.$auth.fetchUser().then( () => {
-      return this.$router.push('/');
-    }).catch( (e) => {
+    this.$axios.get(process.env.API_URL + '/api/user').then((r) => {
+      this.$auth.setUser(r.data);
+
+      this.$auth.loginWith('laravelPassportPassword', {
+        data: {
+          username: r.data.data.email,
+          password: process.env.SOCIALITE_PASSWORD,
+        },
+      })
+    }).catch((e) => {
       this.$auth.logout();
-      // return this.$router.push(`/auth/${this.$route.query.origin ? this.$route.query.origin : 'register'}?error=1`);
+
     });
+
+    this.$router.push(`/`)
   }
 }
 </script>
@@ -31,6 +41,7 @@ export default {
 .container {
   text-align: center;
 }
+
 .loader {
   margin: 20px auto;
   border: 8px solid #f3f3f3;
@@ -42,12 +53,22 @@ export default {
   -webkit-animation: spin 1.2s linear infinite;
   animation: spin 1.2s linear infinite;
 }
+
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
+
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

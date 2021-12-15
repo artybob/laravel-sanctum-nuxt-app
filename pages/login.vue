@@ -102,7 +102,6 @@ export default {
     if ((localStorage.getItem('user') !== null)) {
       this.user = JSON.parse(localStorage.user);
     }
-    console.log(process.env.API_URL)
   },
   computed: {},
   methods: {
@@ -121,8 +120,8 @@ export default {
     socialLogin(service) {
       window.location.href = `${process.env.API_URL}/api/login/${service}`;
     },
-    async login() {
-      await this.$auth.loginWith('laravelPassportPassword', {
+    login() {
+      this.$auth.loginWith('laravelPassportPassword', {
         data: {
           username: this.user.email,
           password: this.user.password,
