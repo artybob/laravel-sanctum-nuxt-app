@@ -63,6 +63,7 @@
 
 <script>
 export default {
+  middleware: 'authenticated',
   data() {
     return {
       loading: true,
@@ -79,7 +80,6 @@ export default {
     this.loading = false;
 
   },
-  middleware: 'authenticated',
   methods: {
     createImage(file) {
       const reader = new FileReader();

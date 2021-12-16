@@ -46,6 +46,7 @@
 
 export default {
   name: "login",
+  middleware: 'guest',
   data: () => ({
     valid: true,
     user: {email: '', password: '', name: ''},
@@ -58,7 +59,7 @@ export default {
       this.$refs.form.validate()
     },
     async register() {
-      // this.$axios.get(process.env.API_URL + '/sanctum/csrf-cookie').then(response => {
+      this.$axios.get(process.env.API_URL + '/sanctum/csrf-cookie').then(response => {
         this.$axios.post(process.env.API_URL + '/register', this.user).catch((err) => {
           let errors = [];
           if (err.response.data.errors) {
@@ -74,7 +75,7 @@ export default {
             })
           }
         });
-      // })
+      })
     }
   }
 }

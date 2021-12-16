@@ -35,7 +35,7 @@ export default {
     // csrfToken: ' ',
     disableStats: false,
   },
-  //eyJpdiI6InpBMTRTaTIxMEdMQUMwZU5PMVErVmc9PSIsInZhbHVlIjoiQkUxRzNOeGl2TkVNVk9YMHhzOXpEcVI0NlpDckM3ZkNNcWNhMUEvNnZBTDhQWjF0WGViK0NMcVR6VmFCbE5MaXNraENvM2FHNVdGeXVyTHpNWU8xQ2gzYWltbnU2Qnp2WHNVbTI3M3dqczJ6SmttWXVEeDFpbytvMmJIcks3VzMiLCJtYWMiOiI5MTg2ODM0MDYxZWY0ZjAwYTE5MWY4NTE3YzUzYTgxMTk3MTZmYTU3YjkzZGFlOWQxYTRjYWEzZmM4NjZjZjY3IiwidGFnIjoiIn0%3D
+
   auth: {
     strategies: {
       'laravelSanctum': {
