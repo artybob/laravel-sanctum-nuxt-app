@@ -22,7 +22,7 @@
                 max-width="50"
                 style="cursor: pointer;"
                 contain
-                src="https://p.kindpng.com/picc/s/27-277891_logo-gmail-png-file-gmail-icon-svg-wikimedia.png"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2048px-Google_%22G%22_Logo.svg.png"
                 @click="socialLogin('google')"
               ></v-img>
 
@@ -33,7 +33,7 @@
                 contain
                 style="cursor: pointer;"
                 src="https://upload.wikimedia.org/wikipedia/commons/2/21/VK.com-logo.svg"
-                @click="socialLogin('vk')"
+                @click="socialLogin('vkontakte')"
               ></v-img>
             </v-row>
           </v-container>
