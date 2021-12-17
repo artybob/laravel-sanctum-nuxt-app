@@ -70,12 +70,16 @@ export default {
       settingsForm: {},
       image: undefined,
       user: this.$store.state.auth.user['data'],
-      imageUrl: "https://bizraise.pro/wp-content/uploads/2014/09/no-avatar-300x300.png",
+      imageUrl: "",
     }
   },
   created() {
     if (this.user.avatar) {
-      this.imageUrl =  process.env.API_URL + '/storage/' + this.user.avatar
+      this.imageUrl = this.user.avatar
+      //hardcoded
+      if(this.user.avatar.indexOf("http") === -1) {
+        this.imageUrl =  process.env.API_URL + '/storage/' + this.user.avatar
+      }
     }
     this.loading = false;
 

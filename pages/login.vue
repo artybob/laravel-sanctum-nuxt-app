@@ -103,13 +103,12 @@ export default {
     if ((localStorage.getItem('user') !== null)) {
       this.user = JSON.parse(localStorage.user);
     }
-    console.log(process.env.API_URL)
   },
   computed: {
   },
   methods: {
     socialLogin(service) {
-      window.location.href = `${process.env.API_URL}/login/${service}`;
+      window.location.href = `${process.env.API_URL}/api/login/${service}`;
     },
     saveUserStorage() {
       localStorage.setItem('user', JSON.stringify({email: this.user.email, password: this.user.password,}));

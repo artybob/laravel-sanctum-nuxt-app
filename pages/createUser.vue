@@ -52,7 +52,7 @@
     <v-data-table
       :headers="headers"
       :items="users"
-      item-key="name"
+      item-key="id"
       class="elevation-1 mt-10"
       :search="search"
     >

@@ -10,28 +10,18 @@ export default {
   middleware: ['guest'],
   data() {
     return {
-      // token: this.$route.query.token ? this.$route.query.token : null
+      token: this.$route.query.token ? this.$route.query.token : null
     }
   },
   mounted() {
-    console.log('123')
-
-
-    // this.$axios.get(process.env.API_URL + '/api/user').then((r) => {
-    //   this.$auth.setUser(r.data);
-    //
-    //   this.$auth.loginWith('laravelPassportPassword', {
-    //     data: {
-    //       username: r.data.data.email,
-    //       password: process.env.SOCIALITE_PASSWORD,
-    //     },
-    //   })
-    // }).catch((e) => {
-    //   this.$auth.logout();
-    //
-    // });
-
-    // this.$router.push('/');
+    console.log(this.token);
+    this.$auth.setUserToken('Bearer ' + this.token).then(() => {
+      this.$auth.fetchUser().then(() => {
+        this.$router.push('/');
+      })
+    }).catch((e) => {
+      this.$auth.logout();
+    });
   }
 }
 </script>
