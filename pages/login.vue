@@ -4,13 +4,41 @@
       <v-col cols="12" sm="6">
         <div class="mb-8 mt-8">
           <h2>Login socials</h2>
-          <v-img
-            max-height="50"
-            max-width="50"
-            style="cursor: pointer;"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Facebook_F_icon.svg/2048px-Facebook_F_icon.svg.png"
-            @click="socialLogin('facebook')"
-          ></v-img>
+          <v-container class="mt-5">
+            <v-row>
+              <v-img
+                class="mr-3"
+                max-height="50"
+                max-width="50"
+                contain
+                style="cursor: pointer;"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Facebook_F_icon.svg/2048px-Facebook_F_icon.svg.png"
+                @click="socialLogin('facebook')"
+              ></v-img>
+
+              <v-img
+                class="mr-3"
+                max-height="50"
+                max-width="50"
+                style="cursor: pointer;"
+                contain
+                src="https://p.kindpng.com/picc/s/27-277891_logo-gmail-png-file-gmail-icon-svg-wikimedia.png"
+                @click="socialLogin('google')"
+              ></v-img>
+
+              <v-img
+                class="mr-3"
+                max-height="50"
+                max-width="50"
+                contain
+                style="cursor: pointer;"
+                src="https://upload.wikimedia.org/wikipedia/commons/2/21/VK.com-logo.svg"
+                @click="socialLogin('vk')"
+              ></v-img>
+            </v-row>
+          </v-container>
+
+
         </div>
         <h2>OR</h2>
 
