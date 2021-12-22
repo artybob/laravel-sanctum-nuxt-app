@@ -28,8 +28,8 @@ export default {
 
   echo: {
     broadcaster: 'pusher',
-    key: 'fa078a2591e7259497d9',
-    cluster: 'ap2',
+    key: process.env.PUSHER_APP_KEY,
+    cluster: process.env.PUSHER_APP_CLUSTER,
     encrypted: true,
     authEndpoint: process.env.API_URL+"/broadcasting/auth",
     // csrfToken: ' ',

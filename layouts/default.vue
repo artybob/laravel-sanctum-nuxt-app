@@ -64,8 +64,8 @@ export default {
         },
         {
           icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
+          title: 'rolesCheck',
+          to: '/rolesCheck'
         },
       ],
       title: 'Laravel-Sanctum-Nuxt-app'

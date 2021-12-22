@@ -19,9 +19,9 @@
           <v-btn
             color="primary"
             nuxt
-            to="/inspire"
+            to="/rolesCheck"
           >
-            Continue
+            Check roles
           </v-btn>
         </v-card-actions>
       </v-card>

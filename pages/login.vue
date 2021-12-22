@@ -42,6 +42,11 @@
         </div>
         <h2>OR</h2>
 
+        <div class="mb-5">
+          <h3>As admin:</h3>
+          johndoe@example.com
+          password
+        </div>
         <v-form
           ref="form"
           v-model="valid"

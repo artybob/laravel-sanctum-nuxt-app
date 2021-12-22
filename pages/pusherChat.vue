@@ -15,7 +15,7 @@
 <!--            hardcoded api url-->
             <v-img
               aspect-ratio="1.7"
-              :src="'http://localhost:8000/storage/' + message.user.avatar"
+              :src= "apiUrl + '/storage/' + message.user.avatar"
               >
             </v-img>
           </v-list-item-avatar>
@@ -68,6 +68,7 @@ export default {
 
   data() {
     return {
+      apiUrl: process.env.API_URL,
       newMessage: '',
       messages: []
     }
