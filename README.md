@@ -1,4 +1,10 @@
-1) Edit or create.env
+This project created for me just for educational purposes. I want to understand how nuxt+sanctum works. 
+It also contains pusher chat, social auth and simple roles system. Backend based on docker.
+
+
+## Project setup
+```
+Edit or create.env
 
 APP_URL=http://localhost:3000
 
@@ -11,10 +17,12 @@ https://dashboard.pusher.com/
 PUSHER_APP_KEY=
 
 PUSHER_APP_CLUSTER=
+```
 
-
-2) Start app
-
+## Start setup
+```
 npm install
 
 npm run dev
+```
+
