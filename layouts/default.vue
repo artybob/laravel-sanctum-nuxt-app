@@ -88,6 +88,11 @@ export default {
               to: '/pusherChat',
             },
             {
+              icon: 'mdi-android-messages',
+              title: 'streams',
+              to: '/streams',
+            },
+            {
               icon: 'mdi-account-box',
               title: this.$store.state.auth.user['data'].name,
               to: '/me',
