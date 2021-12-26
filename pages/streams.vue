@@ -9,7 +9,7 @@
                max-width="250"></v-img>
       </div>
       <v-row>
-        <v-col cols="12" md="3" v-for="stream in streamService.data">
+        <v-col cols="12" md="3" sm="12" v-for="stream in streamService.data">
           <v-item>
             <v-card
               class="mx-auto"
@@ -60,6 +60,7 @@
       </v-row>
     </div>
 
+    <div v-if="!streamsData">No streams data</div>
 <!--    <v-btn @click="getStreamsData()">Renew</v-btn>-->
   </div>
 </template>
@@ -68,7 +69,7 @@
 export default {
   data() {
     return {
-      userRoles: this.$auth.user.data.roles ?? [],
+      userRoles: this.$auth.user?.data.roles ?? [],
       streamsData: [],
     }
   },
@@ -80,7 +81,7 @@ export default {
   methods: {
     getStreamsData() {
       this.$axios.get('/api/streams/data').then(response => {
-        this.streamsData = response.data;
+        this.streamsData = response?.data;
       });
     },
   },

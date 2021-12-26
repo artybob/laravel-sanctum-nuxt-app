@@ -22,7 +22,7 @@
 export default {
   data() {
     return {
-      userRoles: this.$auth.user.data.roles ?? [],
+      userRoles: this.$auth.user?.data.roles ?? [],
     }
   },
   middleware: 'authenticated',
