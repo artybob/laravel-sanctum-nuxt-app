@@ -15,8 +15,29 @@
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title class="title" style="margin-top:20px;">{{ this.user.name }}</v-list-item-title>
-            <v-list-item-subtitle>{{ this.user.email }} | <span v-for="role in this.user.roles">{{ role }}</span>
+            <v-list-item-subtitle>
+              <span
+                v-bind:class="{ 'green--text': this.user.email_verified_at }">{{ this.user.email }}</span>
+              <span v-if="!linkSent">
+              <v-btn
+                :loading="loadingLink"
+                class="green--text"
+                @click="sendVerificationLink"
+                text
+                v-if="!this.user.email_verified_at">
+                send verification link
+              </v-btn>
+              </span>
+              <span v-else>
+                <span>verification sent check your email.</span>
+              </span>
             </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-subtitle>Roles</v-list-item-subtitle>
+            <span v-for="role in this.user.roles">{{ role }}</span>
           </v-list-item-content>
         </v-list-item>
       </v-col>
@@ -66,6 +87,8 @@ export default {
   middleware: 'authenticated',
   data() {
     return {
+      linkSent: false,
+      loadingLink: false,
       loading: true,
       settingsForm: {},
       image: undefined,
@@ -77,8 +100,8 @@ export default {
     if (this.user.avatar) {
       this.imageUrl = this.user.avatar
       //hardcoded
-      if(this.user.avatar.indexOf("http") === -1) {
-        this.imageUrl =  process.env.API_URL + '/storage/' + this.user.avatar
+      if (this.user.avatar.indexOf("http") === -1) {
+        this.imageUrl = process.env.API_URL + '/storage/' + this.user.avatar
       }
     }
     this.loading = false;
@@ -99,6 +122,25 @@ export default {
         return;
       }
       this.createImage(file);
+    },
+    sendVerificationLink() {
+      this.loadingLink = true;
+
+      this.$axios.get(process.env.API_URL + '/sanctum/csrf-cookie').then(response => {
+        this.$axios.post(process.env.API_URL + '/api/email/verify/resend', this.user).catch((err) => {
+
+          let errors = [];
+          if (err.response.data.errors) {
+            for (const [key, value] of Object.entries(err.response.data.errors)) {
+              errors.push(value);
+            }
+          }
+          $nuxt.$emit('error', err.response.data.message.concat(errors.join(' ')))
+        }).then((res) => {
+          this.linkSent = true;
+          this.loadingLink = false;
+        });
+      });
     },
     saveSettings() {
       this.changeAvatar();
