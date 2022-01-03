@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Streams</h1>
-    <div v-if="streamsData" class="streamsContainer" v-for="streamService in streamsData">
+    <div :key="streamService.id" v-if="streamsData" class="streamsContainer" v-for="streamService in streamsData">
       <div class="mb-5">
         <v-img :src="streamService.logo"
                class="ma-auto"
@@ -9,7 +9,7 @@
                max-width="250"></v-img>
       </div>
       <v-row>
-        <v-col cols="12" md="3" sm="12" v-for="stream in streamService.data">
+        <v-col cols="12" md="3" sm="12" :key="stream.id" v-for="stream in streamService.data">
           <v-item>
             <v-card
               class="mx-auto"
@@ -44,7 +44,7 @@
                   </v-avatar>
                   {{ stream.viewer_count }}
                 </v-chip>
-<!--                <small>{{ streamService.name }}</small>-->
+                <!--                <small>{{ streamService.name }}</small>-->
               </v-card-title>
 
               <v-card-subtitle>
@@ -61,7 +61,7 @@
     </div>
 
     <div v-if="!streamsData">No streams data</div>
-<!--    <v-btn @click="getStreamsData()">Renew</v-btn>-->
+    <!--    <v-btn @click="getStreamsData()">Renew</v-btn>-->
   </div>
 </template>
 

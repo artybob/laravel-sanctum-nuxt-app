@@ -79,7 +79,7 @@ export default {
           ? [
             {
               icon: 'mdi-account-multiple-plus',
-              title: 'create User',
+              title: 'createUser',
               to: '/createUser',
             },
             {
@@ -87,10 +87,15 @@ export default {
               title: 'pusherChat',
               to: '/pusherChat',
             },
+            // {
+            //   icon: 'mdi-android-messages',
+            //   title: 'streams',
+            //   to: '/streams',
+            // },
             {
-              icon: 'mdi-android-messages',
-              title: 'streams',
-              to: '/streams',
+              icon: 'mdi-alpha-a-box-outline',
+              title: 'articles',
+              to: '/articles',
             },
             {
               icon: 'mdi-account-box',
